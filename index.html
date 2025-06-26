@@ -5,69 +5,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TrustPassport Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      function switchTab(tab) {
+        document.getElementById('renterTab').classList.add('hidden');
+        document.getElementById('landlordTab').classList.add('hidden');
+        document.getElementById(tab).classList.remove('hidden');
+
+        document.getElementById('renterBtn').classList.remove('bg-blue-600', 'text-white');
+        document.getElementById('landlordBtn').classList.remove('bg-blue-600', 'text-white');
+
+        document.getElementById(tab + 'Btn').classList.add('bg-blue-600', 'text-white');
+      }
+    </script>
   </head>
   <body class="bg-gray-100 font-sans">
-    <div class="max-w-4xl mx-auto p-6">
-      <header class="mb-6">
-        <h1 class="text-3xl font-bold text-gray-800">TrustPassport</h1>
-        <p class="text-gray-600">Verified renter profile for trust-based letting</p>
+    <div class="max-w-5xl mx-auto py-10 px-6">
+      <header class="mb-10">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">TrustPassport</h1>
+        <p class="text-gray-600">Verified trust profiles for letting with confidence</p>
       </header>
 
-      <section class="bg-white rounded-xl shadow p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Renter Summary</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <p class="text-gray-500">Name</p>
-            <p class="font-medium text-gray-900">Luke Reynolds</p>
-          </div>
-          <div>
-            <p class="text-gray-500">Age</p>
-            <p class="font-medium text-gray-900">29</p>
-          </div>
-          <div>
-            <p class="text-gray-500">Current Employment</p>
-            <p class="font-medium text-gray-900">Full-time at Supy (18 months)</p>
-          </div>
-          <div>
-            <p class="text-gray-500">Monthly Income</p>
-            <p class="font-medium text-gray-900">£2,700</p>
-          </div>
-        </div>
-      </section>
+      <!-- Tabs -->
+      <div class="flex space-x-4 mb-6">
+        <button id="renterBtn" onclick="switchTab('renterTab')" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium">Renter Profile</button>
+        <button id="landlordBtn" onclick="switchTab('landlordTab')" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 font-medium">Landlord View</button>
+      </div>
 
-      <section class="bg-white rounded-xl shadow p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Payment History</h2>
-        <ul class="text-sm text-gray-700 space-y-2">
-          <li>
-            ✅ On-time rent payments for the last 16 months
-          </li>
-          <li>
-            ⚠️ 6 missed payments in Jan 2024 due to redundancy (confirmed)
-          </li>
-          <li>
-            ✅ No missed utility or credit card payments since Feb 2024
-          </li>
-        </ul>
-      </section>
-
-      <section class="bg-white rounded-xl shadow p-6 mb-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Landlord References</h2>
-        <div class="space-y-4">
-          <div>
-            <p class="font-medium text-gray-900">James Thompson (Previous landlord)</p>
-            <p class="text-gray-600 italic">"Luke was reliable and respectful. Rent always paid on time post-redundancy period."</p>
+      <!-- Renter Tab -->
+      <div id="renterTab">
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Summary</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <p class="text-gray-500">Name</p>
+              <p class="font-medium text-gray-900">Luke Reynolds</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Age</p>
+              <p class="font-medium text-gray-900">29</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Current Employment</p>
+              <p class="font-medium text-gray-900">Full-time at Supy (18 months)</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Monthly Income</p>
+              <p class="font-medium text-gray-900">£2,700</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="bg-white rounded-xl shadow p-6">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Verified Insights</h2>
-        <ul class="text-sm text-gray-700 space-y-2">
-          <li>✔️ Employment verified via payslip upload</li>
-          <li>✔️ Income verified via Open Banking (last 3 months)</li>
-          <li>✔️ Rent pattern verified via transaction history</li>
-        </ul>
-      </section>
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Payment History</h2>
+          <ul class="text-sm text-gray-700 space-y-3">
+            <li>✅ On-time rent payments for the last 16 months</li>
+            <li>⚠️ 6 missed payments in Jan 2024 due to redundancy (confirmed)</li>
+            <li>✅ No missed utility or credit card payments since Feb 2024</li>
+          </ul>
+        </section>
+
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Landlord References</h2>
+          <div class="space-y-4">
+            <div>
+              <p class="font-medium text-gray-900">James Thompson (Previous landlord)</p>
+              <p class="text-gray-600 italic">"Luke was reliable and respectful. Rent always paid on time post-redundancy period."</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Verified Insights</h2>
+          <ul class="text-sm text-gray-700 space-y-3">
+            <li>✔️ Employment verified via payslip upload</li>
+            <li>✔️ Income verified via Open Banking (last 3 months)</li>
+            <li>✔️ Rent pattern verified via transaction history</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- Landlord Tab -->
+      <div id="landlordTab" class="hidden">
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Property Overview</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <p class="text-gray-500">Property Address</p>
+              <p class="font-medium text-gray-900">123 High Street, Leeds</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Monthly Rent</p>
+              <p class="font-medium text-gray-900">£895</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Available From</p>
+              <p class="font-medium text-gray-900">1st August 2025</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Current Applications</p>
+              <p class="font-medium text-gray-900">3 pending TrustPassports</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow p-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Highlights</h2>
+          <ul class="text-sm text-gray-700 space-y-3">
+            <li>🔍 Luke Reynolds — 18 months stable employment, verified rent history</li>
+            <li>🔍 Jade Smith — NHS nurse, no credit score but pays £750 rent consistently for 2+ years</li>
+            <li>🔍 Omar Ali — Self-employed, references from two landlords, income verified</li>
+          </ul>
+        </section>
+      </div>
     </div>
   </body>
 </html>
