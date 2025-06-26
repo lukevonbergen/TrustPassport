@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Trust Passport MVP</title>
-  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #3B82F6;
-      --secondary: #2563EB;
       --accent: #10B981;
       --warning: #F59E0B;
       --danger: #EF4444;
@@ -20,304 +18,177 @@
       --border: #E5E7EB;
       --radius: 8px;
       --shadow: rgba(0, 0, 0, 0.05);
-      --transition: 0.2s;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
-    /* Sidebar */
-    .sidebar {
-      width: 240px;
-      background: var(--card-bg);
-      border-right: 1px solid var(--border);
       padding: 20px;
+    }
+    .tabs {
       display: flex;
-      flex-direction: column;
-      transition: transform var(--transition);
-    }
-    .sidebar.hidden { transform: translateX(-260px); }
-    .sidebar h2 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      color: var(--primary);
-    }
-    .nav-item {
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: color var(--transition);
-      white-space: nowrap;
-    }
-    .nav-item.active, .nav-item:hover {
-      color: var(--text);
-      font-weight: 500;
-    }
-    /* Main Content */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-    }
-    header {
-      background: var(--card-bg);
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
       flex-wrap: wrap;
     }
-    .menu-btn {
-      display: none;
-      font-size: 1.5rem;
+    .tab {
+      padding: 10px 18px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       cursor: pointer;
-      color: var(--text-muted);
-      margin-right: 16px;
+      font-weight: 500;
+      transition: all 0.2s ease;
     }
-    .header-left { display: flex; align-items: center; }
-    .header-left h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
+    .tab.active {
+      background: var(--primary);
+      color: white;
     }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .icon {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      cursor: pointer;
-    }
-    .avatar {
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: var(--border);
-    }
-    /* Content Sections */
     .content {
-      padding: 24px;
       display: none;
       animation: fadeIn 0.3s ease;
     }
-    .content.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0);} }
-    .section { margin-bottom: 2.5rem; }
+    .content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .section-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 1rem;
     }
-    /* Cards */
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: 20px;
       box-shadow: 0 2px 4px var(--shadow);
+      margin-bottom: 20px;
     }
-    .flex { display: flex; gap: 24px; flex-wrap: wrap; }
-    .flex-center { align-items: center; }
-    /* Trust Score */
     .score-circle {
-      width: 140px; height: 140px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background: conic-gradient(var(--accent) 0deg 270deg, var(--border) 270deg 360deg);
-      display: flex; align-items: center; justify-content: center;
-      margin-right: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
     }
-    .score-num { font-size: 2.5rem; font-weight: 700; color: var(--accent); font-family: monospace; }
-    .score-details { display: flex; flex-direction: column; justify-content: center; }
-    .score-label { font-size: 1rem; color: var(--text-muted); }
-    .score-text  { font-size: 1.1rem; font-weight: 500; }
-    /* Metrics Grid */
+    .score-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: monospace;
+    }
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
     }
     .metric {
-      padding: 16px;
-      border-radius: var(--radius);
       background: var(--card-bg);
       border-left: 4px solid var(--accent);
-      box-shadow: 0 1px 3px var(--shadow);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: var(--radius);
     }
     .metric.warning { border-left-color: var(--warning); }
-    .metric.danger  { border-left-color: var(--danger); }
-    .metric .title { font-size: 0.85rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-    .metric .value { font-size: 1.5rem; font-weight: 600; }
-    .metric .status { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
-    /* Verification List */
-    .list-item {
+    .metric.danger { border-left-color: var(--danger); }
+    .metric .title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .metric .value {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+        .loan-status {
+      font-size: 1.1rem;
+      padding: 16px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-align: center;
+    }
+    .approved { color: var(--accent); background: #e6fef3; }
+    .rejected { color: var(--danger); background: #fef2f2; }
+    ul.trust-timeline {
+      list-style: none;
+      padding: 0;
+    }
+    ul.trust-timeline li {
+      padding: 12px;
+      margin-bottom: 12px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      box-shadow: 0 1px 3px var(--shadow);
-      transition: background var(--transition);
-    }
-    .list-item:hover { background: #fff; }
-    .list-item .icon { font-size: 1.2rem; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; color: #fff; border-radius: 4px; }
-    .list-item.verified .icon { background: var(--accent); }
-    .list-item.pending  .icon { background: var(--warning); }
-    .list-item.failed   .icon { background: var(--danger); }
-    .list-item .text { flex: 1; }
-    .heading { font-weight: 500; }
-    .sub { font-size: 0.9rem; color: var(--text-muted); }
-    /* Table */
-    table { width: 100%; border-collapse: collapse; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 3px var(--shadow); }
-    th, td { padding: 12px 16px; text-align: left; font-size: 0.9rem; }
-    th { background: var(--bg); font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border); }
-    tr:not(:last-child) td { border-bottom: 1px solid var(--border); }
-    /* Toggle */
-    .toggle { position: relative; width: 40px; height: 20px; }
-    .toggle input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--border); transition: .2s; border-radius: 20px; }
-    .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background: white; transition: .2s; border-radius: 50%; }
-    input:checked + .slider { background: var(--accent); }
-    input:checked + .slider:before { transform: translateX(20px); }
-    /* Responsive */
-    @media (max-width: 768px) {
-      body { flex-direction: column; }
-      .menu-btn { display: block; }
-      .sidebar { position: absolute; top: 0; left: 0; height: 100%; z-index: 100; }
-      .sidebar.hidden { transform: translateX(-260px); }
-      .sidebar, .main { width: 100%; }
-      .sidebar h2 { display: none; }
-      .nav-item { margin: 0 16px; }
-      header { justify-content: space-between; }
-      .flex { flex-direction: column; }
-      .metrics-grid { grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); }
     }
   </style>
 </head>
 <body>
-  <aside class="sidebar hidden" id="sidebar">
-    <h2>Trust Passport</h2>
-    <div class="nav-item active" onclick="openTab('overview')">Overview</div>
-    <div class="nav-item" onclick="openTab('activity')">Activity</div>
-    <div class="nav-item" onclick="openTab('transactions')">Transactions</div>
-    <div class="nav-item" onclick="openTab('settings')">Settings</div>
-  </aside>
-  <div class="main">
-    <header>
-      <div class="header-left">
-        <div class="menu-btn" id="menuBtn">☰</div>
-        <h1 id="page-title">Overview</h1>
-      </div>
-      <div class="header-right">
-        <div class="icon">🔔</div>
-        <div class="icon">💬</div>
-        <div class="avatar"></div>
-      </div>
-    </header>
-    <!-- Overview -->
-    <section id="overview" class="content active">
-      <div class="section trust-score flex">
-        <div class="card flex-center">
-          <div class="score-circle"><div class="score-num">78</div></div>
-          <div class="score-details">
-            <div class="score-label">Trust Score</div>
-            <div class="score-text">Good - Ready for most uses</div>
-          </div>
-        </div>
-        <div class="card metrics-grid">
-          <div class="metric"><div class="title">Employment</div><div class="value">Verified</div></div>
-          <div class="metric"><div class="title">Rental</div><div class="value">36mo</div></div>
-          <div class="metric warning"><div class="title">Income</div><div class="value">2,450/mo</div><div class="status">Variance</div></div>
-          <div class="metric"><div class="title">Endorsements</div><div class="value">7</div></div>
-        </div>
-      </div>
-      <div class="section">
-        <div class="section-title">Verification Items</div>
-        <div class="list-item verified"><div class="icon">✓</div><div class="text"><div class="heading">Bank Linked</div><div class="sub">Barclays •••• 1234</div></div></div>
-        <div class="list-item verified"><div class="icon">✓</div><div class="text"><div class="heading">Employment</div><div class="sub">Acme Corp, Jan 2023</div></div></div>
-        <div class="list-item pending"><div class="icon">⏳</div><div class="text"><div class="heading">References</div><div class="sub">2 of 3</div></div></div>
-        <div class="list-item failed"><div class="icon">✖</div><div class="text"><div class="heading">Utilities</div><div class="sub">Not connected</div></div></div>
-      </div>
-    </section>
-    <!-- Activity -->
-    <section id="activity" class="content">
-      <div class="section">
-        <div class="section-title">Recent Assessments</div>
-        <div class="list-item"><div class="icon">🔍</div><div class="text"><div class="heading">usr_7823 - Score 82</div><div class="sub">Rental approved 2m ago</div></div></div>
-        <div class="list-item"><div class="icon">🔍</div><div class="text"><div class="heading">usr_7821 - Score 67</div><div class="sub">Manual review 15m ago</div></div></div>
-        <div class="list-item"><div class="icon">🔍</div><div class="text"><div class="heading">usr_7819 - Score 89</div><div class="sub">Employment ok 1h ago</div></div></div>
-      </div>
-      <div class="section">
-        <div class="section-title">API Stats</div>
-        <div class="metrics-grid">
-          <div class="metric"><div class="title">Calls Today</div><div class="value">1,247</div></div>
-          <div class="metric"><div class="title">Approval Lift</div><div class="value">94.2%</div></div>
-          <div class="metric danger"><div class="title">Default Rate</div><div class="value">2.3%</div></div>
-        </div>
-      </div>
-    </section>
-    <!-- Transactions -->
-    <section id="transactions" class="content">
-      <div class="section">
-        <div class="section-title">Recent Transactions</div>
-        <table>
-          <thead><tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>2025-06-25</td><td>Rental Payment</td><td>£1,200</td><td>Completed</td></tr>
-            <tr><td>2025-06-20</td><td>Utility Bill</td><td>£85</td><td>Pending</td></tr>
-            <tr><td>2025-06-15</td><td>Salary Incoming</td><td>£2,500</td><td>Completed</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <!-- Settings -->
-    <section id="settings" class="content">
-      <div class="section">
-        <div class="section-title">Account Settings</div>
-        <div class="list-item"><div class="icon">👤</div><div class="text"><div class="heading">Profile</div><div class="sub">Edit personal info</div></div></div>
-        <div class="list-item"><div class="icon">🔒</div><div class="text"><div class="heading">Security</div><div class="sub">Change password</div></div></div>
-        <div class="list-item"><div class="icon">🌐</div><div class="text"><div class="heading">Notifications</div><div class="sub">Email, SMS</div></div></div>
-      </div>
-      <div class="section">
-        <div class="section-title">Preferences</div>
-        <div class="flex-center"><label>Dark Mode</label><div class="toggle"><input type="checkbox" id="theme-toggle"><span class="slider"></span></div></div>
-      </div>
-    </section>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('overview', this)">Overview</button>
+    <button class="tab" onclick="showTab('activity', this)">Recent Activity</button>
+    <button class="tab" onclick="showTab('decision', this)">Loan Decision</button>
   </div>
+
+  <!-- Overview -->
+  <div id="overview" class="content active">
+    <div class="section-title">Trust Score</div>
+    <div class="card">
+      <div class="score-circle"><div class="score-num">78</div></div>
+      <p style="text-align:center;">Good – Ready for most uses</p>
+    </div>
+
+    <div class="section-title">Verified Metrics</div>
+    <div class="metrics-grid">
+      <div class="metric"><div class="title">Employment</div><div class="value">Verified</div></div>
+      <div class="metric"><div class="title">Rental</div><div class="value">36mo</div></div>
+      <div class="metric warning"><div class="title">Income</div><div class="value">2,450/mo</div></div>
+      <div class="metric"><div class="title">Endorsements</div><div class="value">7</div></div>
+    </div>
+  </div>
+
+  <!-- Activity -->
+  <div id="activity" class="content">
+    <div class="section-title">Trust Timeline</div>
+    <ul class="trust-timeline">
+      <li>✔️ Salary of £2,500 received – 15 June</li>
+      <li>✔️ Rent paid – 1 June</li>
+      <li>✔️ Employment verified – Acme Corp</li>
+      <li>❌ Utilities verification failed</li>
+      <li>🔄 Reference 2 of 3 received</li>
+    </ul>
+  </div>
+
+  <!-- Loan Decision -->
+  <div id="decision" class="content">
+    <div class="section-title">Loan Decision</div>
+    <div class="card">
+      <div class="loan-status approved">✅ Approved for £2,000</div>
+      <p>You are pre-approved based on employment, rental history, and endorsements.</p>
+    </div>
+  </div>
+
   <script>
-    // Sidebar toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const sidebar = document.getElementById('sidebar');
-    menuBtn.addEventListener('click', () => sidebar.classList.toggle('hidden'));
-    
-    // Tab navigation
-    function openTab(id) {
-      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      event.currentTarget.classList.add('active');
+    function showTab(id, el) {
+      document.querySelectorAll('.tab').forEach(btn => btn.classList.remove('active'));
+      el.classList.add('active');
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      document.getElementById('page-title').textContent = id.charAt(0).toUpperCase() + id.slice(1);
-      if(window.innerWidth <= 768) sidebar.classList.add('hidden');
     }
-    
-    // Dark mode toggle
-    document.getElementById('theme-toggle').addEventListener('change', function() {
-      if(this.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-      }
-    });
   </script>
+
 </body>
 </html>
