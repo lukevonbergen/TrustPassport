@@ -5,233 +5,247 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trust Passport Dashboard</title>
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #667eea;
       --secondary: #764ba2;
-      --success: #10b981;
+      --accent: #10b981;
       --warning: #f59e0b;
       --info: #3b82f6;
-      --bg-light: #f8fafc;
-      --bg-dark: #ffffff;
-      --text-dark: #1f2937;
-      --text-muted: #6b7280;
-      --radius: 12px;
-      --transition: 0.3s ease;
+      --bg-dark: rgba(10, 14, 25, 0.85);
+      --bg-glass: rgba(255, 255, 255, 0.1);
+      --bg-light: rgba(255, 255, 255, 0.05);
+      --text-light: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --radius: 16px;
+      --transition: 0.4s ease;
+      --spacing: 40px;
     }
-    *, *::before, *::after {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      scroll-behavior: smooth;
     }
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: radial-gradient(circle at top left, var(--primary), var(--secondary));
+      color: var(--text-light);
       min-height: 100vh;
-      color: var(--text-dark);
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding: 40px 20px;
+      padding: var(--spacing);
     }
     .container {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1300px;
     }
     header {
       text-align: center;
-      margin-bottom: 40px;
-      color: #fff;
+      margin-bottom: calc(var(--spacing) * 1.2);
+      letter-spacing: 1px;
     }
     header h1 {
-      font-size: 2.8rem;
-      font-weight: 700;
+      font-size: 3rem;
+      font-weight: 600;
       margin-bottom: 8px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-shadow: 0 4px 30px rgba(0,0,0,0.4);
     }
     header p {
-      font-size: 1.1rem;
-      opacity: 0.85;
+      font-size: 1.2rem;
+      color: var(--text-muted);
     }
     nav.tabs {
       display: flex;
       justify-content: center;
-      gap: 12px;
-      margin-bottom: 30px;
+      gap: 20px;
+      margin-bottom: var(--spacing);
     }
     .tab {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      padding: 10px 22px;
+      background: var(--bg-light);
+      padding: 14px 30px;
       border-radius: 999px;
-      font-weight: 500;
       cursor: pointer;
-      transition: background var(--transition), transform var(--transition);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all var(--transition);
     }
     .tab.active,
     .tab:hover {
-      background: #fff;
+      background: var(--bg-glass);
       color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 35px rgba(0,0,0,0.3);
     }
     .dashboard {
-      background: var(--bg-dark);
+      background: var(--bg-glass);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(20px);
       border-radius: var(--radius);
-      padding: 40px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      padding: calc(var(--spacing) * 0.8);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
       display: none;
+      margin-bottom: var(--spacing);
     }
     .dashboard.active { display: block; }
     .trust-score {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: var(--spacing);
     }
     .score-circle {
-      width: 140px;
-      height: 140px;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      background: conic-gradient(var(--success) 0deg 270deg, #e5e7eb 270deg 360deg);
+      background: conic-gradient(var(--accent) 0deg 270deg, rgba(255,255,255,0.1) 270deg 360deg);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
       position: relative;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
     .score-circle::before {
       content: '';
-      width: 100px;
-      height: 100px;
+      width: 110px;
+      height: 110px;
       background: var(--bg-dark);
       border-radius: 50%;
       position: absolute;
     }
     .score-number {
-      font-size: 2.4rem;
+      font-size: 2.8rem;
       font-weight: 700;
-      color: var(--success);
+      color: var(--accent);
       z-index: 1;
+      font-family: monospace;
     }
     .score-label {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: var(--text-muted);
       margin-bottom: 6px;
     }
     .score-description {
-      font-weight: 600;
-      color: var(--success);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--accent);
     }
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: var(--spacing);
     }
     .card {
       background: var(--bg-light);
       border-radius: var(--radius);
-      padding: 24px;
+      padding: 32px;
       position: relative;
-      overflow: hidden;
-      transition: transform var(--transition), box-shadow var(--transition);
-      border-left: 4px solid var(--success);
+      transition: all var(--transition);
+      border-left: 4px solid var(--accent);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.2);
     }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 45px rgba(0,0,0,0.35);
     }
     .card.warning { border-left-color: var(--warning); }
     .card.info { border-left-color: var(--info); }
     .card .title {
-      font-size: 0.9rem;
+      font-size: 1rem;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-bottom: 8px;
-      font-weight: 500;
+      margin-bottom: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
     }
     .card .value {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 6px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      font-family: monospace;
     }
     .card .status {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: var(--success);
+      color: var(--accent);
     }
     .card.warning .status { color: var(--warning); }
     .card.info .status { color: var(--info); }
     .section {
-      margin-bottom: 40px;
+      margin-bottom: var(--spacing);
     }
     .section-title {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 16px;
-      color: var(--text-dark);
+      margin-bottom: 20px;
+      color: var(--text-light);
+      letter-spacing: 1px;
     }
-    .list { display: grid; gap: 15px; }
+    .list { display: grid; gap: 20px; }
     .item {
       display: flex;
       align-items: center;
       background: var(--bg-light);
       border-radius: var(--radius);
-      padding: 16px;
-      border: 1px solid #e5e7eb;
-      transition: background var(--transition);
+      padding: 20px 28px;
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      transition: all var(--transition);
     }
-    .item.verified { background: #ecfdf5; border-color: var(--success); }
-    .item.pending { background: #fef3c7; border-color: var(--warning); }
-    .item.not-verified { background: var(--bg-light); border-color: #e5e7eb; }
+    .item:hover { transform: translateX(5px); }
+    .item.verified { background: rgba(16,185,129,0.1); border-color: var(--accent); }
+    .item.pending { background: rgba(245,158,11,0.1); border-color: var(--warning); }
+    .item.not-verified { background: var(--bg-light); border-color: rgba(255,255,255,0.15); }
     .item .icon {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       color: #fff;
-      margin-right: 16px;
+      margin-right: 20px;
       border-radius: 6px;
     }
-    .item.verified .icon { background: var(--success); }
+    .item.verified .icon { background: var(--accent); }
     .item.pending .icon { background: var(--warning); }
     .item.not-verified .icon { background: var(--text-muted); }
-    .item .text {
-      flex: 1;
-    }
-    .item .text .subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
+    .item .text .title { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+    .item .text .subtitle { font-size: 0.9rem; color: var(--text-muted); }
     .share {
       text-align: center;
-      margin-top: 20px;
+      margin-top: var(--spacing);
     }
     .btn {
-      padding: 12px 32px;
+      padding: 14px 36px;
       border-radius: 999px;
       font-weight: 600;
       cursor: pointer;
+      letter-spacing: 1px;
       transition: transform var(--transition);
+      border: none;
     }
     .btn.primary {
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       color: #fff;
-      border: none;
-      margin: 0 8px;
+      margin: 0 12px;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.3);
     }
     .btn.secondary {
       background: transparent;
       color: var(--primary);
       border: 2px solid var(--primary);
-      margin: 0 8px;
+      margin: 0 12px;
     }
-    .btn:hover { transform: translateY(-2px); }
+    .btn:hover { transform: translateY(-3px) scale(1.03); }
   </style>
 </head>
 <body>
@@ -241,178 +255,54 @@
       <p>Your verified identity for instant trust decisions</p>
     </header>
     <nav class="tabs">
-      <div class="tab active" onclick="switchTab('consumer')">Consumer Dashboard</div>
-      <div class="tab" onclick="switchTab('api')">API Integration</div>
+      <div class="tab active" onclick="switchTab('consumer')">Consumer</div>
+      <div class="tab" onclick="switchTab('api')">API</div>
     </nav>
-
-    <!-- Consumer Dashboard -->
+    <!-- Dashboards -->
     <section id="consumer" class="dashboard active">
       <div class="trust-score">
-        <div class="score-circle">
-          <div class="score-number">78</div>
-        </div>
+        <div class="score-circle"><div class="score-number">78</div></div>
         <div class="score-label">Trust Score</div>
         <div class="score-description">Good - Ready for most applications</div>
       </div>
-
       <div class="metrics-grid">
-        <div class="card">
-          <div class="title">Employment Stability</div>
-          <div class="value">18 months</div>
-          <div class="status">Current role verified</div>
-        </div>
-        <div class="card">
-          <div class="title">Rental History</div>
-          <div class="value">36 months</div>
-          <div class="status">Perfect payment record</div>
-        </div>
-        <div class="card warning">
-          <div class="title">Income Consistency</div>
-          <div class="value">£2,450/mo</div>
-          <div class="status">Slight variance detected</div>
-        </div>
-        <div class="card info">
-          <div class="title">Endorsements</div>
-          <div class="value">7 active</div>
-          <div class="status">From 3 sources</div>
-        </div>
+        <div class="card"><div class="title">Employment Stability</div><div class="value">18 months</div><div class="status">Role verified</div></div>
+        <div class="card"><div class="title">Rental History</div><div class="value">36 months</div><div class="status">Perfect record</div></div>
+        <div class="card warning"><div class="title">Income Consistency</div><div class="value">£2,450/mo</div><div class="status">Slight variance</div></div>
+        <div class="card info"><div class="title">Endorsements</div><div class="value">7 active</div><div class="status">3 sources</div></div>
       </div>
-
-      <div class="section">
-        <div class="section-title">Verification Status</div>
-        <div class="list">
-          <div class="item verified">
-            <div class="icon">✓</div>
-            <div class="text">
-              <div class="title">Bank Account Connected</div>
-              <div class="subtitle">Barclays •••• 1234 - Last sync: 2 hours ago</div>
-            </div>
-          </div>
-          <div class="item verified">
-            <div class="icon">✓</div>
-            <div class="text">
-              <div class="title">Employment Verified</div>
-              <div class="subtitle">Acme Corp - Software Developer since Jan 2023</div>
-            </div>
-          </div>
-          <div class="item verified">
-            <div class="icon">✓</div>
-            <div class="text">
-              <div class="title">Rental Payments</div>
-              <div class="subtitle">£1,200/month - 36 consecutive payments</div>
-            </div>
-          </div>
-          <div class="item pending">
-            <div class="icon">⏳</div>
-            <div class="text">
-              <div class="title">Professional References</div>
-              <div class="subtitle">2 of 3 references confirmed</div>
-            </div>
-          </div>
-          <div class="item not-verified">
-            <div class="icon">+</div>
-            <div class="text">
-              <div class="title">Utilities Account</div>
-              <div class="subtitle">Connect to improve your score</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="share">
-        <button class="btn primary">Generate Shareable Link</button>
-        <button class="btn secondary">Download PDF Report</button>
-      </div>
+      <div class="section"><div class="section-title">Verification Status</div><div class="list">
+        <div class="item verified"><div class="icon">✓</div><div class="text"><div class="title">Bank Connected</div><div class="subtitle">Barclays ••••1234 - 2h ago</div></div></div>
+        <div class="item verified"><div class="icon">✓</div><div class="text"><div class="title">Employment Verified</div><div class="subtitle">Acme Corp - Since Jan 2023</div></div></div>
+        <div class="item verified"><div class="icon">✓</div><div class="text"><div class="title">Rental Payments</div><div class="subtitle">36 consecutive months</div></div></div>
+        <div class="item pending"><div class="icon">⏳</div><div class="text"><div class="title">Professional References</div><div class="subtitle">2 of 3 confirmed</div></div></div>
+        <div class="item not-verified"><div class="icon">+</div><div class="text"><div class="title">Utilities Account</div><div class="subtitle">Connect to improve</div></div></div>
+      </div></div>
+      <div class="share"><button class="btn primary">Share Link</button><button class="btn secondary">Download PDF</button></div>
     </section>
-
-    <!-- API Dashboard -->
     <section id="api" class="dashboard">
-      <div class="metrics-grid" style="margin-bottom: 40px;">
-        <div class="card">
-          <div class="title">API Calls Today</div>
-          <div class="value">1,247</div>
-        </div>
-        <div class="card">
-          <div class="title">Approval Rate Lift</div>
-          <div class="value">94.2%</div>
-        </div>
-        <div class="card warning">
-          <div class="title">Default Rate</div>
-          <div class="value">2.3%</div>
-          <div class="status warning">Watch closely</div>
-        </div>
-        <div class="card info">
-          <div class="title">Verified Users</div>
-          <div class="value">856</div>
-        </div>
+      <div class="metrics-grid">
+        <div class="card"><div class="title">API Calls Today</div><div class="value">1,247</div></div>
+        <div class="card"><div class="title">Approval Rate Lift</div><div class="value">94.2%</div></div>
+        <div class="card warning"><div class="title">Default Rate</div><div class="value">2.3%</div><div class="status">Monitor</div></div>
+        <div class="card info"><div class="title">Verified Users</div><div class="value">856</div></div>
       </div>
-
-      <div class="section">
-        <div class="section-title">Recent Trust Assessments</div>
-        <div class="list">
-          <div class="item">
-            <div class="text">
-              <div class="title">User ID: usr_7823 - Score: 82</div>
-              <div class="subtitle">Rental application approved</div>
-            </div>
-            <div class="subtitle">2 min ago</div>
-          </div>
-          <div class="item">
-            <div class="text">
-              <div class="title">User ID: usr_7821 - Score: 67</div>
-              <div class="subtitle">Loan application - manual review</div>
-            </div>
-            <div class="subtitle">15 min ago</div>
-          </div>
-          <div class="item">
-            <div class="text">
-              <div class="title">User ID: usr_7819 - Score: 89</div>
-              <div class="subtitle">Employment verification approved</div>
-            </div>
-            <div class="subtitle">1 hour ago</div>
-          </div>
-          <div class="item">
-            <div class="text">
-              <div class="title">User ID: usr_7817 - Score: 45</div>
-              <div class="subtitle">Insufficient data</div>
-            </div>
-            <div class="subtitle">2 hours ago</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="section-title">API Integration Status</div>
-        <div class="list">
-          <div class="item verified">
-            <div class="icon">✓</div>
-            <div class="text">
-              <div class="title">Webhook Endpoints</div>
-              <div class="subtitle">All endpoints responding - 99.9% uptime</div>
-            </div>
-          </div>
-          <div class="item verified">
-            <div class="icon">✓</div>
-            <div class="text">
-              <div class="title">Data Sources</div>
-              <div class="subtitle">5 providers connected - Real-time sync</div>
-            </div>
-          </div>
-          <div class="item pending">
-            <div class="icon">⏳</div>
-            <div class="text">
-              <div class="title">Compliance Audit</div>
-              <div class="subtitle">GDPR review in progress</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="section"><div class="section-title">Recent Assessments</div><div class="list">
+        <div class="item"><div class="text"><div class="title">usr_7823 - Score: 82</div><div class="subtitle">Rental approved</div></div><div class="subtitle">2m ago</div></div>
+        <div class="item"><div class="text"><div class="title">usr_7821 - Score: 67</div><div class="subtitle">Manual review</div></div><div class="subtitle">15m ago</div></div>
+        <div class="item"><div class="text"><div class="title">usr_7819 - Score: 89</div><div class="subtitle">Employment ok</div></div><div class="subtitle">1h ago</div></div>
+        <div class="item"><div class="text"><div class="title">usr_7817 - Score: 45</div><div class="subtitle">Insufficient data</div></div><div class="subtitle">2h ago</div></div>
+      </div></div>
+      <div class="section"><div class="section-title">Integration Status</div><div class="list">
+        <div class="item verified"><div class="icon">✓</div><div class="text"><div class="title">Webhooks</div><div class="subtitle">99.9% uptime</div></div></div>
+        <div class="item verified"><div class="icon">✓</div><div class="text"><div class="title">Data Sources</div><div class="subtitle">5 providers</div></div></div>
+        <div class="item pending"><div class="icon">⏳</div><div class="text"><div class="title">Compliance</div><div class="subtitle">GDPR review</div></div></div>
+      </div></div>
     </section>
   </div>
-
   <script>
     function switchTab(tab) {
-      document.querySelectorAll('.dashboard').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.dashboard').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       document.getElementById(tab).classList.add('active');
       document.querySelector(`.tab[onclick*='${tab}']`).classList.add('active');
