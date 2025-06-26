@@ -19,7 +19,7 @@
     </script>
   </head>
   <body class="bg-gray-100 font-sans">
-    <div class="max-w-5xl mx-auto py-10 px-6">
+    <div class="max-w-6xl mx-auto py-10 px-6">
       <header class="mb-10">
         <h1 class="text-4xl font-bold text-gray-800 mb-2">TrustPassport</h1>
         <p class="text-gray-600">Verified trust profiles for letting with confidence</p>
@@ -33,8 +33,20 @@
 
       <!-- Renter Tab -->
       <div id="renterTab">
+        <!-- Trust Summary -->
         <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Summary</h2>
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Trust Summary</h2>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>✅ Stable employment at Supy (18 months)</li>
+            <li>✅ Verified income via Open Banking (£2,700/month)</li>
+            <li>✅ 16 months of on-time rent payments</li>
+            <li>⚠️ 6 missed payments in Jan 2024 (confirmed redundancy)</li>
+          </ul>
+        </section>
+
+        <!-- Renter Summary -->
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Details</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
               <p class="text-gray-500">Name</p>
@@ -45,8 +57,8 @@
               <p class="font-medium text-gray-900">29</p>
             </div>
             <div>
-              <p class="text-gray-500">Current Employment</p>
-              <p class="font-medium text-gray-900">Full-time at Supy (18 months)</p>
+              <p class="text-gray-500">Employment</p>
+              <p class="font-medium text-gray-900">Full-time at Supy</p>
             </div>
             <div>
               <p class="text-gray-500">Monthly Income</p>
@@ -55,17 +67,21 @@
           </div>
         </section>
 
+        <!-- Document Upload -->
         <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Payment History</h2>
-          <ul class="text-sm text-gray-700 space-y-3">
-            <li>✅ On-time rent payments for the last 16 months</li>
-            <li>⚠️ 6 missed payments in Jan 2024 due to redundancy (confirmed)</li>
-            <li>✅ No missed utility or credit card payments since Feb 2024</li>
-          </ul>
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Proof Vault</h2>
+          <div class="space-y-4">
+            <input type="file" class="block w-full text-sm text-gray-600" />
+            <input type="file" class="block w-full text-sm text-gray-600" />
+            <input type="file" class="block w-full text-sm text-gray-600" />
+            <input type="file" class="block w-full text-sm text-gray-600" />
+          </div>
+          <p class="mt-2 text-xs text-gray-500">Upload payslips, bank statements, ID, or landlord references</p>
         </section>
 
+        <!-- References -->
         <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Landlord References</h2>
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Endorsements</h2>
           <div class="space-y-4">
             <div>
               <p class="font-medium text-gray-900">James Thompson (Previous landlord)</p>
@@ -74,13 +90,21 @@
           </div>
         </section>
 
-        <section class="bg-white rounded-xl shadow p-6">
+        <!-- Verified Insights -->
+        <section class="bg-white rounded-xl shadow p-6 mb-6">
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Verified Insights</h2>
-          <ul class="text-sm text-gray-700 space-y-3">
+          <ul class="text-sm text-gray-700 space-y-2">
             <li>✔️ Employment verified via payslip upload</li>
-            <li>✔️ Income verified via Open Banking (last 3 months)</li>
-            <li>✔️ Rent pattern verified via transaction history</li>
+            <li>✔️ Income verified via Open Banking</li>
+            <li>✔️ Rent payment pattern confirmed</li>
+            <li>✔️ ID submitted</li>
           </ul>
+        </section>
+
+        <!-- Share + Download -->
+        <section class="bg-white rounded-xl shadow p-6 text-center">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">Copy Share Link</button>
+          <button class="ml-4 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-medium">Download PDF</button>
         </section>
       </div>
 
@@ -90,7 +114,7 @@
           <h2 class="text-2xl font-semibold text-gray-800 mb-4">Property Overview</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <p class="text-gray-500">Property Address</p>
+              <p class="text-gray-500">Address</p>
               <p class="font-medium text-gray-900">123 High Street, Leeds</p>
             </div>
             <div>
@@ -102,19 +126,56 @@
               <p class="font-medium text-gray-900">1st August 2025</p>
             </div>
             <div>
-              <p class="text-gray-500">Current Applications</p>
-              <p class="font-medium text-gray-900">3 pending TrustPassports</p>
+              <p class="text-gray-500">Applications</p>
+              <p class="font-medium text-gray-900">3 TrustPassports pending</p>
             </div>
           </div>
         </section>
 
         <section class="bg-white rounded-xl shadow p-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Highlights</h2>
-          <ul class="text-sm text-gray-700 space-y-3">
-            <li>🔍 Luke Reynolds — 18 months stable employment, verified rent history</li>
-            <li>🔍 Jade Smith — NHS nurse, no credit score but pays £750 rent consistently for 2+ years</li>
-            <li>🔍 Omar Ali — Self-employed, references from two landlords, income verified</li>
-          </ul>
+          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Applications</h2>
+          <table class="min-w-full table-auto text-sm text-left text-gray-700">
+            <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+              <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2">Job</th>
+                <th class="px-4 py-2">Income</th>
+                <th class="px-4 py-2">Rent Verified</th>
+                <th class="px-4 py-2">Payments</th>
+                <th class="px-4 py-2">References</th>
+                <th class="px-4 py-2">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-900">Luke Reynolds</td>
+                <td class="px-4 py-3">Full-time at Supy</td>
+                <td class="px-4 py-3">£2,700</td>
+                <td class="px-4 py-3">✔️ 16 months</td>
+                <td class="px-4 py-3">Missed Jan 2024</td>
+                <td class="px-4 py-3">Landlord Verified</td>
+                <td class="px-4 py-3">🟢 Complete</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-900">Jade Smith</td>
+                <td class="px-4 py-3">NHS Nurse</td>
+                <td class="px-4 py-3">£2,200</td>
+                <td class="px-4 py-3">✔️ 24 months</td>
+                <td class="px-4 py-3">Flawless</td>
+                <td class="px-4 py-3">Employer & Landlord</td>
+                <td class="px-4 py-3">🟠 Verifying Employer</td>
+              </tr>
+              <tr>
+                <td class="px-4 py-3 font-medium text-gray-900">Omar Ali</td>
+                <td class="px-4 py-3">Freelance Designer</td>
+                <td class="px-4 py-3">£1,800 avg</td>
+                <td class="px-4 py-3">✔️ 12 months</td>
+                <td class="px-4 py-3">Stable</td>
+                <td class="px-4 py-3">2 Landlords</td>
+                <td class="px-4 py-3">🔵 ID Pending</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
       </div>
     </div>
