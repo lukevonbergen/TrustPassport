@@ -17,165 +17,148 @@
         document.getElementById(tab + 'Btn').classList.add('bg-blue-600', 'text-white');
       }
     </script>
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-gray-100 font-sans">
-    <div class="max-w-6xl mx-auto py-10 px-6">
-      <header class="mb-10">
-        <h1 class="text-4xl font-bold text-gray-800 mb-2">TrustPassport</h1>
-        <p class="text-gray-600">Verified trust profiles for letting with confidence</p>
+  <body class="bg-gradient-to-br from-gray-100 to-white min-h-screen">
+    <div class="max-w-6xl mx-auto py-12 px-6">
+      <header class="mb-10 text-center">
+        <h1 class="text-5xl font-extrabold text-gray-800 tracking-tight">TrustPassport</h1>
+        <p class="text-lg text-gray-500 mt-2">Smart, verified trust profiles for fairer renting</p>
       </header>
 
       <!-- Tabs -->
-      <div class="flex space-x-4 mb-6">
-        <button id="renterBtn" onclick="switchTab('renterTab')" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium">Renter Profile</button>
-        <button id="landlordBtn" onclick="switchTab('landlordTab')" class="px-4 py-2 rounded-lg bg-white border border-gray-300 text-gray-800 font-medium">Landlord View</button>
+      <div class="flex justify-center mb-10">
+        <button id="renterBtn" onclick="switchTab('renterTab')" class="px-5 py-2 rounded-full bg-blue-600 text-white font-semibold shadow">Renter Profile</button>
+        <button id="landlordBtn" onclick="switchTab('landlordTab')" class="ml-4 px-5 py-2 rounded-full border border-gray-300 bg-white text-gray-800 font-semibold shadow">Landlord View</button>
       </div>
 
       <!-- Renter Tab -->
       <div id="renterTab">
-        <!-- Trust Summary -->
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-xl font-semibold text-gray-800 mb-4">Trust Summary</h2>
-          <ul class="text-sm text-gray-700 space-y-2">
-            <li>✅ Stable employment at Supy (18 months)</li>
-            <li>✅ Verified income via Open Banking (£2,700/month)</li>
-            <li>✅ 16 months of on-time rent payments</li>
-            <li>⚠️ 6 missed payments in Jan 2024 (confirmed redundancy)</li>
-          </ul>
+        <!-- Trust Score Summary -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">Trust Score</h2>
+          <div class="flex items-center space-x-6">
+            <div class="text-6xl font-extrabold text-blue-600">84</div>
+            <div>
+              <p class="text-lg font-semibold text-green-600">Trusted</p>
+              <p class="text-sm text-gray-500">Stable income, verified rent, one-off hardship now resolved</p>
+            </div>
+          </div>
+          <div class="mt-4 text-sm text-gray-700">
+            <ul class="list-disc ml-6 space-y-1">
+              <li>✔️ Rent paid on time for 16 months</li>
+              <li>✔️ Employed at Supy for 18 months</li>
+              <li>✔️ Income verified via Open Banking</li>
+              <li>⚠️ Temporary hardship in Jan 2024 – resolved</li>
+            </ul>
+          </div>
         </section>
 
-        <!-- Renter Summary -->
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Details</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <p class="text-gray-500">Name</p>
-              <p class="font-medium text-gray-900">Luke Reynolds</p>
+        <!-- Visual timeline -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-6">Payment Timeline</h2>
+          <div class="flex items-center justify-between text-sm text-center">
+            <div class="w-full">
+              <p class="text-xs text-gray-400 mb-1">Jan 2024</p>
+              <div class="h-3 w-3 rounded-full bg-red-500 mx-auto"></div>
+              <p class="text-gray-500 mt-1">Missed</p>
             </div>
-            <div>
-              <p class="text-gray-500">Age</p>
-              <p class="font-medium text-gray-900">29</p>
+            <div class="w-full">
+              <p class="text-xs text-gray-400 mb-1">Feb</p>
+              <div class="h-3 w-3 rounded-full bg-green-500 mx-auto"></div>
             </div>
-            <div>
-              <p class="text-gray-500">Employment</p>
-              <p class="font-medium text-gray-900">Full-time at Supy</p>
+            <div class="w-full">
+              <p class="text-xs text-gray-400 mb-1">Mar</p>
+              <div class="h-3 w-3 rounded-full bg-green-500 mx-auto"></div>
             </div>
-            <div>
-              <p class="text-gray-500">Monthly Income</p>
-              <p class="font-medium text-gray-900">£2,700</p>
+            <div class="w-full">
+              <p class="text-xs text-gray-400 mb-1">Apr–Now</p>
+              <div class="h-3 w-3 rounded-full bg-green-500 mx-auto"></div>
+              <p class="text-green-600 mt-1">On Time</p>
             </div>
           </div>
         </section>
 
-        <!-- Document Upload -->
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Proof Vault</h2>
-          <div class="space-y-4">
-            <input type="file" class="block w-full text-sm text-gray-600" />
-            <input type="file" class="block w-full text-sm text-gray-600" />
-            <input type="file" class="block w-full text-sm text-gray-600" />
-            <input type="file" class="block w-full text-sm text-gray-600" />
-          </div>
-          <p class="mt-2 text-xs text-gray-500">Upload payslips, bank statements, ID, or landlord references</p>
-        </section>
-
-        <!-- References -->
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Endorsements</h2>
-          <div class="space-y-4">
-            <div>
-              <p class="font-medium text-gray-900">James Thompson (Previous landlord)</p>
-              <p class="text-gray-600 italic">"Luke was reliable and respectful. Rent always paid on time post-redundancy period."</p>
-            </div>
+        <!-- File Upload Vault -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">Proof Vault</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input type="file" class="block w-full text-sm text-gray-600 border rounded p-2" placeholder="Payslip" />
+            <input type="file" class="block w-full text-sm text-gray-600 border rounded p-2" placeholder="Bank Statement" />
+            <input type="file" class="block w-full text-sm text-gray-600 border rounded p-2" placeholder="ID Document" />
+            <input type="file" class="block w-full text-sm text-gray-600 border rounded p-2" placeholder="Landlord Reference" />
           </div>
         </section>
 
-        <!-- Verified Insights -->
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Verified Insights</h2>
-          <ul class="text-sm text-gray-700 space-y-2">
-            <li>✔️ Employment verified via payslip upload</li>
-            <li>✔️ Income verified via Open Banking</li>
-            <li>✔️ Rent payment pattern confirmed</li>
-            <li>✔️ ID submitted</li>
-          </ul>
+        <!-- Endorsements -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">Endorsements</h2>
+          <div class="border-l-4 border-blue-500 pl-4 italic text-gray-700">
+            “Luke was reliable and respectful. Rent always paid on time post-redundancy period.”<br/>
+            <span class="block mt-2 text-sm font-semibold text-gray-600">— James Thompson, Previous Landlord</span>
+          </div>
         </section>
 
         <!-- Share + Download -->
-        <section class="bg-white rounded-xl shadow p-6 text-center">
-          <button class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium">Copy Share Link</button>
-          <button class="ml-4 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg font-medium">Download PDF</button>
+        <section class="bg-white rounded-2xl shadow-lg p-8 text-center">
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium shadow">Copy Share Link</button>
+          <button class="ml-4 bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-2 rounded-full font-medium shadow">Download PDF</button>
         </section>
       </div>
 
       <!-- Landlord Tab -->
       <div id="landlordTab" class="hidden">
-        <section class="bg-white rounded-xl shadow p-6 mb-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Property Overview</h2>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <p class="text-gray-500">Address</p>
-              <p class="font-medium text-gray-900">123 High Street, Leeds</p>
-            </div>
-            <div>
-              <p class="text-gray-500">Monthly Rent</p>
-              <p class="font-medium text-gray-900">£895</p>
-            </div>
-            <div>
-              <p class="text-gray-500">Available From</p>
-              <p class="font-medium text-gray-900">1st August 2025</p>
-            </div>
-            <div>
-              <p class="text-gray-500">Applications</p>
-              <p class="font-medium text-gray-900">3 TrustPassports pending</p>
-            </div>
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">Renter Applications</h2>
+          <div class="overflow-x-auto">
+            <table class="min-w-full table-auto text-sm text-left text-gray-700">
+              <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+                <tr>
+                  <th class="px-4 py-2">Name</th>
+                  <th class="px-4 py-2">Job</th>
+                  <th class="px-4 py-2">Income</th>
+                  <th class="px-4 py-2">Rent Verified</th>
+                  <th class="px-4 py-2">Payment History</th>
+                  <th class="px-4 py-2">Endorsements</th>
+                  <th class="px-4 py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3 font-medium text-gray-900">Luke Reynolds</td>
+                  <td class="px-4 py-3">Full-time @ Supy</td>
+                  <td class="px-4 py-3">£2,700</td>
+                  <td class="px-4 py-3">✔️ 16 months</td>
+                  <td class="px-4 py-3">Missed Jan 2024, stable since</td>
+                  <td class="px-4 py-3">Landlord</td>
+                  <td class="px-4 py-3 text-green-600 font-semibold">Verified</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3 font-medium text-gray-900">Jade Smith</td>
+                  <td class="px-4 py-3">NHS Nurse</td>
+                  <td class="px-4 py-3">£2,200</td>
+                  <td class="px-4 py-3">✔️ 24 months</td>
+                  <td class="px-4 py-3">Flawless</td>
+                  <td class="px-4 py-3">Employer + Landlord</td>
+                  <td class="px-4 py-3 text-blue-600 font-semibold">Pending</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-4 py-3 font-medium text-gray-900">Omar Ali</td>
+                  <td class="px-4 py-3">Freelance Designer</td>
+                  <td class="px-4 py-3">£1,800 avg</td>
+                  <td class="px-4 py-3">✔️ 12 months</td>
+                  <td class="px-4 py-3">Stable</td>
+                  <td class="px-4 py-3">2 Landlords</td>
+                  <td class="px-4 py-3 text-yellow-600 font-semibold">ID Pending</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </section>
-
-        <section class="bg-white rounded-xl shadow p-6">
-          <h2 class="text-2xl font-semibold text-gray-800 mb-4">Renter Applications</h2>
-          <table class="min-w-full table-auto text-sm text-left text-gray-700">
-            <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-              <tr>
-                <th class="px-4 py-2">Name</th>
-                <th class="px-4 py-2">Job</th>
-                <th class="px-4 py-2">Income</th>
-                <th class="px-4 py-2">Rent Verified</th>
-                <th class="px-4 py-2">Payments</th>
-                <th class="px-4 py-2">References</th>
-                <th class="px-4 py-2">Status</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-              <tr>
-                <td class="px-4 py-3 font-medium text-gray-900">Luke Reynolds</td>
-                <td class="px-4 py-3">Full-time at Supy</td>
-                <td class="px-4 py-3">£2,700</td>
-                <td class="px-4 py-3">✔️ 16 months</td>
-                <td class="px-4 py-3">Missed Jan 2024</td>
-                <td class="px-4 py-3">Landlord Verified</td>
-                <td class="px-4 py-3">🟢 Complete</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-3 font-medium text-gray-900">Jade Smith</td>
-                <td class="px-4 py-3">NHS Nurse</td>
-                <td class="px-4 py-3">£2,200</td>
-                <td class="px-4 py-3">✔️ 24 months</td>
-                <td class="px-4 py-3">Flawless</td>
-                <td class="px-4 py-3">Employer & Landlord</td>
-                <td class="px-4 py-3">🟠 Verifying Employer</td>
-              </tr>
-              <tr>
-                <td class="px-4 py-3 font-medium text-gray-900">Omar Ali</td>
-                <td class="px-4 py-3">Freelance Designer</td>
-                <td class="px-4 py-3">£1,800 avg</td>
-                <td class="px-4 py-3">✔️ 12 months</td>
-                <td class="px-4 py-3">Stable</td>
-                <td class="px-4 py-3">2 Landlords</td>
-                <td class="px-4 py-3">🔵 ID Pending</td>
-              </tr>
-            </tbody>
-          </table>
         </section>
       </div>
     </div>
